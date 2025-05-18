@@ -7,19 +7,17 @@ const userResolvers = {
     },
   },
   Mutation: {
-    createUser: async (
-      _: any,
-      args: { name: string; email: string; password: string }
-    ) => {
-      return prisma.user.create({
-        data: {
-          name: args.name,
-          email: args.email,
-          password: args.password,
-        },
-      })
-    },
+  createUser: async (
+    _: any,
+    args: { data: { name: string; email: string; password: string } }
+  ) => {
+    const { name, email, password } = args.data
+    return prisma.user.create({
+      data: { name, email, password },
+    })
   },
+},
+
 }
 
 export default userResolvers

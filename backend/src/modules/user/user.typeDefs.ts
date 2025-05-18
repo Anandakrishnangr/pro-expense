@@ -12,8 +12,14 @@ const userTypeDefs = gql`
     users: [User!]!
   }
 
+  input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
   type Mutation {
-    createUser(name: String!, email: String!, password: String!): User!
+    createUser(data:CreateUserInput!): User!
   }
 `
 

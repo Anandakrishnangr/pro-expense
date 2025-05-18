@@ -128,6 +128,36 @@ exports.Prisma.UserScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  date: 'date',
+  deleted: 'deleted',
+  deletedAt: 'deletedAt',
+  user_id: 'user_id',
+  parentId: 'parentId'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  description: 'description',
+  date: 'date',
+  deleted: 'deleted',
+  deletedAt: 'deletedAt',
+  user_id: 'user_id',
+  category_id: 'category_id',
+  type: 'type'
+};
+
+exports.Prisma.TagsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  deleted: 'deleted',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -138,9 +168,20 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.TransactionType = exports.$Enums.TransactionType = {
+  CREDIT: 'CREDIT',
+  DEBIT: 'DEBIT'
+};
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Category: 'Category',
+  Transaction: 'Transaction',
+  Tags: 'Tags'
 };
 
 /**
