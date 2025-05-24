@@ -1,14 +1,7 @@
-type User {
-  id: String!
-  name: String!
-  email: String!
-  createdAt: String!
+type AuthPayload {
+  accessToken: String!
+  refreshToken: String!
 }
-
-type Query {
-  users: [User!]!
-}
-
 
 input CreateUserInput {
   name: String!
@@ -16,6 +9,27 @@ input CreateUserInput {
   password: String!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
-  createUser(data:CreateUserInput): User!
+  login(data: LoginInput!): AuthPayload!
+  logout: Boolean!
+  refreshToken(token: String!): AuthPayload!
+  revokeToken(token: String!): Boolean!
+  createUser(data: CreateUserInput!): User!
+}
+
+type Query {
+  isValidToken(token: String!): Boolean!
+  users: [User!]!
+}
+
+type User {
+  id: String!
+  name: String!
+  email: String!
+  createdAt: String!
 }

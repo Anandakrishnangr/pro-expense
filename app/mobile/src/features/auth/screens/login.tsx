@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
-  TextInput,
-  Button,
   StyleSheet,
-  TouchableOpacity,
   Alert,
 } from 'react-native';
-import { useAuthStore } from '../store/authStore';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { AuthStackParamList } from '../constants';
+import {useAuthStore} from '../store/authStore';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AuthStackParamList} from '../constants';
+import {Input, Button, Link} from '../../../components';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
-export default function LoginScreen({ navigation }: Props) {
+export default function LoginScreen({navigation}: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { login } = useAuthStore();
+  const {login} = useAuthStore();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -38,27 +36,23 @@ export default function LoginScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Back</Text>
-      <TextInput
+      <Input
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
         autoCapitalize="none"
-        style={styles.input}
       />
-      <TextInput
+      <Input
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        style={styles.input}
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      <Button title="Login" onPress={handleLogin} />
 
-      <TouchableOpacity onPress={() => Alert.alert('Navigate to Register')}>
-        <Text style={styles.link}>Don't have an account? Register</Text>
-      </TouchableOpacity>
+      <Link onPress={() => navigation.navigate('Register')}>
+        <Text>Don't have an account? Register</Text>
+      </Link>
     </View>
   );
 }

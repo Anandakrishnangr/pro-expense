@@ -4,7 +4,6 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Avoid re-creating the client during hot reloads in dev (especially with Next.js)
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({

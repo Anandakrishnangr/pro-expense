@@ -15,6 +15,6 @@ const schema = makeExecutableSchema({
 
 const printedSchema = printSchema(schema)
 
-fs.writeFileSync(path.join(__dirname, '../temp/schema.graphql'), printedSchema)
+fs.writeFileSync(path.join(__dirname, '../graphql/gen/schema.graphql'), printedSchema)
 
 console.log('✅ schema.graphql generated')
