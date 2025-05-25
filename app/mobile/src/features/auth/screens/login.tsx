@@ -5,10 +5,10 @@ import {
   StyleSheet,
   Alert,
 } from 'react-native';
-import {useAuthStore} from '../store/authStore';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../constants';
 import {Input, Button, Link} from '../../../components';
+import { useAuth } from '../hooks/useAuth';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
@@ -16,19 +16,23 @@ export default function LoginScreen({navigation}: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const {login} = useAuthStore();
+  const {login} = useAuth();
 
   const handleLogin = async () => {
+    console.log('Login button pressed');
     if (!email || !password) {
       Alert.alert('Error', 'Please enter email and password.');
       return;
     }
 
     try {
-      await login(email, password); // mock login
+      console.log('Attempting to login with', {email, password});
+     const response =  await login(email, password); // mock login
+      console.log('Login successful',{response});
       // navigation.replace('Home'); // If using a main app stack
       Alert.alert('Login Success');
     } catch (error) {
+      console.error('Login failed', error);
       Alert.alert('Login Failed', 'Invalid credentials.');
     }
   };

@@ -3,7 +3,7 @@ type AuthPayload {
   refreshToken: String!
 }
 
-input CreateUserInput {
+input SignupInput {
   name: String!
   email: String!
   password: String!
@@ -19,6 +19,7 @@ type Mutation {
   logout: Boolean!
   refreshToken(token: String!): AuthPayload!
   revokeToken(token: String!): Boolean!
+  signup(data: SignupInput!): AuthPayload!
   createUser(data: CreateUserInput!): User!
 }
 
@@ -32,4 +33,10 @@ type User {
   name: String!
   email: String!
   createdAt: String!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
 }

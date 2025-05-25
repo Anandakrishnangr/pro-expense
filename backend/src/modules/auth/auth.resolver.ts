@@ -1,17 +1,16 @@
-import { Login } from "@/services/auth.services";
+import { prisma } from "@/config/prisma.config";
+import { hashPassword } from "@/lib/bcrypt.lib";
+import { Login,  SignupService } from "@/services/auth.services";
 
 const authResolvers = {
   Query: {
     isValidToken: async (_: any, args: { token: string }) => {
       const { token } = args;
-      // Logic to validate the token
-      // This could involve checking the token against a database or decoding it
       if (!token) {
         throw new Error("Token is required");
       }
-      // For now, we assume the token is valid
       return true;
-    }
+    },
   },
   Mutation: {
     login: async (
@@ -36,7 +35,9 @@ const authResolvers = {
     revokeToken: async (_: any, args: { userId: number }) => {
       return true;
     },
+    signup: SignupService
   },
 };
+
 
 export default authResolvers;

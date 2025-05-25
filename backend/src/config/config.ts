@@ -2,9 +2,9 @@ export const MONGO_URI = process.env.MONGO_URI
 export const PORT = process.env.PORT
 
 export const JWT_SECRET = process.env.JWT_SECRET
-export const JWT_EXPIRATION = process.env.JWT_EXPIRATION || '1h'
+export const JWT_EXPIRATION = process.env.JWT_EXPIRATION 
 export const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET
-export const JWT_REFRESH_EXPIRATION = process.env.JWT_REFRESH_EXPIRATION || '7d'
+export const JWT_REFRESH_EXPIRATION = Number(process.env.JWT_REFRESH_EXPIRATION||0)
 
 export const REDIS_URL = process.env.REDIS_URL
 export const REDIS_PORT = process.env.REDIS_PORT

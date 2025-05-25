@@ -4,22 +4,21 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type AuthState = {
-  token: string | null;
+  email: string;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  signin: (email: string) => Promise<void>;
+  signout: () => void;
 };
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      token: null,
       isAuthenticated: false,
-      login: async (email, password) => {
-        await new Promise((res) => setTimeout(res, 1000)); // Mock delay
-        set({ token: 'mock-token-12345', isAuthenticated: true });
+      email: '',
+      signin: async (email) => {
+        set({ email, isAuthenticated: true });
       },
-      logout: () => set({ token: null, isAuthenticated: false }),
+      signout: () => set({ email: '', isAuthenticated: false }),
     }),
     {
       name: 'auth-storage',

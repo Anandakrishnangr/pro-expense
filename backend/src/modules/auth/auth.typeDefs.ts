@@ -7,7 +7,7 @@ const authTypeDefs = gql`
     refreshToken: String!
   }
 
-  input CreateUserInput {
+  input SignupInput {
     name: String!
     email: String!
     password: String!
@@ -23,6 +23,7 @@ const authTypeDefs = gql`
     logout: Boolean!
     refreshToken(token: String!): AuthPayload!
     revokeToken(token: String!): Boolean!
+    signup(data: SignupInput!): AuthPayload!
   }
 
   type Query {

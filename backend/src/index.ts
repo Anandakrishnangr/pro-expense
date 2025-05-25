@@ -10,6 +10,8 @@ import { PORT } from './config/config'
 import { prisma } from './config/prisma.config'
 import typeDefs from './graphql/typeDefs'
 import resolvers from './graphql/resolvers'
+import path from 'path'
+import fs from 'fs'
 
 async function startServer() {
   const app = express()
@@ -34,6 +36,55 @@ async function startServer() {
       res.send('OK')
     } catch (error) {
       res.status(500).send('Database connection failed')
+    }
+  })
+
+  const downloadsDir = path.resolve(__dirname, '../../../Downloads')
+
+  app.use('/share', express.static(downloadsDir))
+
+  app.get('/share/list', (req, res) => {
+    try {
+      fs.readdir(downloadsDir, (err, files) => {
+        if (err) {
+          console.log('Error reading directory:', err)
+          return res.status(500).send('Unable to list files')
+        }
+        const listItems = files
+          .map(
+            (file) =>
+              `<li>
+                <a href="/share/${encodeURIComponent(file)}" download>${file}</a>
+                // <button onclick="()=>copyLink('${encodeURIComponent(file)}')">Copy Link</button>
+              </li>`
+          )
+          .join('')
+        res.send(`
+          <html>
+            <head>
+              <title>Downloadable Files</title>
+              <script>
+                function copyLink(file) {
+                  const url = window.location.origin + '/share/' + file;
+                  navigator.clipboard.writeText(url).then(function() {
+                    alert('Link copied to clipboard!');
+                  }, function(err) {
+                    alert('Failed to copy: ' + err);
+                  });
+                }
+              </script>
+            </head>
+            <body>
+              <h2>Files available for download</h2>
+              <ul>
+                ${listItems}
+              </ul>
+            </body>
+          </html>
+        `)
+      })
+    } catch (error) {
+      console.error('Error listing files:', error)
     }
   })
 

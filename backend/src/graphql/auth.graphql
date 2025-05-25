@@ -21,3 +21,14 @@ mutation RevokeToken($token: String!) {
 query IsValidToken($token: String!) {
   isValidToken(token: $token)
 }
+
+mutation Signup($data: SignupInput!) {
+    signup(data: $data) {
+        ...AuthPayload
+    }
+}
+
+fragment AuthPayload on AuthPayload {
+    accessToken
+    refreshToken
+}

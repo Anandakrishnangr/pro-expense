@@ -8,14 +8,14 @@ import {ApolloProvider} from '@apollo/client';
 import client from './src/lib/apolloClient.config';
 
 function App(): React.JSX.Element {
-  const {isAuthenticated, logout} = useAuthStore();
+  const {isAuthenticated, signout} = useAuthStore();
   return (
     <ApolloProvider client={client}>
       <View style={{flex: 1, backgroundColor: 'green'}}>
         {isAuthenticated ? (
           <>
             <Text>Logedin</Text>
-            <TouchableOpacity onPress={logout}>
+            <TouchableOpacity onPress={signout}>
               <Text>Logout</Text>
             </TouchableOpacity>
           </>
