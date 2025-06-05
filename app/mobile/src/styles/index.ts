@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
@@ -37,7 +37,23 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#4a90e2',
   },
-   localButton: {
-        backgroundColor: '#34C759',
-    },
+  localButton: {
+    backgroundColor: '#34C759',
+  },
+  navcontainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderColor: '#ddd',
+  },
+  navItem: {
+    padding: 10,
+  },
+  navText: {
+    fontSize: 16,
+    color: '#333',
+  },
 });

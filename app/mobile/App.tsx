@@ -6,24 +6,22 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import {useAuthStore} from './src/features/auth/store/authStore';
 import {ApolloProvider} from '@apollo/client';
 import client from './src/lib/apolloClient.config';
+import DashNavigator from './src/features/dashboard/navigator/dashNavigator';
 
 function App(): React.JSX.Element {
-  const {isAuthenticated, signout} = useAuthStore();
+  const {isAuthenticated} = useAuthStore();
   return (
     <ApolloProvider client={client}>
       <View style={{flex: 1, backgroundColor: 'green'}}>
-        {isAuthenticated ? (
-          <>
-            <Text>Logedin</Text>
-            <TouchableOpacity onPress={signout}>
-              <Text>Logout</Text>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <NavigationContainer>
+        <NavigationContainer>
+          {isAuthenticated ? (
+            <>
+              <DashNavigator />
+            </>
+          ) : (
             <AuthNavigator />
-          </NavigationContainer>
-        )}
+          )}
+        </NavigationContainer>
       </View>
     </ApolloProvider>
   );
