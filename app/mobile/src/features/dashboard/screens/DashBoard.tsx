@@ -1,33 +1,52 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 import {useAuthStore} from '../../auth/store/authStore';
 import Nav from '../../../components/nav/nav';
+import {useTheme} from '../../theme/hooks/useTheme';
+import {ThemeSwitch} from '../../../components/ThemeSwitch';
 
 const DashBoard: React.FC = () => {
   const {signout} = useAuthStore();
-
+  const {setselectedTheme, selectedTheme, colors} = useTheme();
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#fff',
+      backgroundColor: colors.background,
+      color: colors.text,
     },
     title: {
       fontSize: 24,
       fontWeight: 'bold',
+      color: colors.text,
     },
   });
+  const changeTheme = () => {
+    console.log(selectedTheme);
+    setselectedTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Dashboard</Text>
-      {/* Add your dashboard content here */}
-      <Text>Logedin</Text>
-      <TouchableOpacity onPress={signout}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-      <Nav />
-    </View>
+    <SafeAreaView style={{flex:1}}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Dashboard</Text>
+        <ThemeSwitch />
+        <TouchableOpacity onPress={changeTheme}>
+          <Text>Theme {selectedTheme}</Text>
+        </TouchableOpacity>
+        <Text>Logedin</Text>
+        <TouchableOpacity onPress={signout}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
+        <Nav />
+      </View>
+    </SafeAreaView>
   );
 };
 

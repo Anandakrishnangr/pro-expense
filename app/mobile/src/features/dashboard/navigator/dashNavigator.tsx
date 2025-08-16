@@ -1,7 +1,8 @@
 // features/auth/navigation/AuthNavigator.tsx
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashBoard from '../screens/DashBoard';
+import { Layout } from '../layout';
 
 export type AuthStackParamList = {
   Dashboard: undefined;
@@ -13,8 +14,8 @@ export default function DashNavigator() {
   return (
     <DashStack.Navigator
       initialRouteName="Dashboard"
-      screenOptions={{ headerShown: false }}
-    >
+      screenOptions={{headerShown: false}}
+      screenLayout={Layout}>
       <DashStack.Screen name="Dashboard" component={DashBoard} />
     </DashStack.Navigator>
   );

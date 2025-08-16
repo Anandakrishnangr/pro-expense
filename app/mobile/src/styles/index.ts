@@ -40,15 +40,7 @@ export const styles = StyleSheet.create({
   localButton: {
     backgroundColor: '#34C759',
   },
-  navcontainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderColor: '#ddd',
-  },
+
   navItem: {
     padding: 10,
   },
