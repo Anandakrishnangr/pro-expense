@@ -2,12 +2,10 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashBoard from '../screens/DashBoard';
-import {Layout} from '../layout';
-import {SettingsNavigator} from '../../settings';
+import { Layout } from '../layout';
 
 export type AuthStackParamList = {
   Dashboard: undefined;
-  Settings: undefined;
 };
 
 const DashStack = createNativeStackNavigator<AuthStackParamList>();
@@ -19,7 +17,6 @@ export default function DashNavigator() {
       screenOptions={{headerShown: false}}
       screenLayout={Layout}>
       <DashStack.Screen name="Dashboard" component={DashBoard} />
-      <DashStack.Screen name="Settings" component={SettingsNavigator} />
     </DashStack.Navigator>
   );
 }

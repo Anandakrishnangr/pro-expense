@@ -13,8 +13,8 @@ function App(): React.JSX.Element {
   return (
     <ThemeProvider>
       <ApolloProvider client={client}>
-        <SafeAreaView style={{flex: 1, backgroundColor: 'green'}}>
-          <NavigationContainer>
+        <SafeAreaView style={{flex: 1}}>
+          <NavigationContainer >
             {isAuthenticated ? (
               <>
                 <DashNavigator />
